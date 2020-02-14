@@ -62,5 +62,36 @@ public class RandomDistribution {
         return r;
     }
 
+    /**Bernoulli distribution
+     * @param p probability
+     * @return YES or NO
+     */
+    public static boolean bernoulli(double p){
+        if(!(p>=0.0 && p<=1.0)){
+            throw new IllegalArgumentException("probability p must be between 0.0 and 1.0");
+        }
+        return uniform()<p;
+    }
+
+    /**
+     * 正太离差的配极法生成Gaussian变量 random.nextGaussian();
+     * @return Gaussian distribution variable
+     */
+    public static double gaussian(){
+        double r, x, y;
+        do{
+            x = uniform(-1.0, 1.0);
+            y = uniform(-1.0, 1.0);
+            r = x*x + y+y;
+        } while(r>=1 || r==0);
+        return x*Math.sqrt(-2*Math.log(r)/r);
+    }
+
+    private static double uniform(double a, double b) {
+        if(!(a<b)){
+            throw new IllegalArgumentException("invalid range: [" + a + ", " + b + ")");
+        }
+        return a+uniform()*(b-a);
+    }
 
 }
