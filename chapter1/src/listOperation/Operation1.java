@@ -3,7 +3,7 @@ package listOperation;
 /**
  * @author Ryan
  * @data 2020/02/14 - 周五
- * @content merge, clone
+ * @content 两个有序链表合并, 链表克隆
  */
 public class Operation1 {
     /**
@@ -21,6 +21,12 @@ public class Operation1 {
         }
     }
 
+    /**
+     * 两个有序链表合并到新链表，并保证原链表是可用的
+     * @param l1
+     * @param l2
+     * @return 合并后新链表的表头
+     */
     public static ListNode mergeTwoLists1(ListNode l1, ListNode l2) {
         ListNode ans = new ListNode(0);
         if(l1==null) {
@@ -41,7 +47,7 @@ public class Operation1 {
     }
 
     /**
-     * List clone to new one
+     * 链表克隆，返回新链表的表头
      * @param a the head node of the cloned list
      * @return new head node
      */
@@ -52,6 +58,7 @@ public class Operation1 {
         return ans;
     }
 
+    //测试
     public static void main(String[] args) { //测试新产生的链表，不会影响先前的链表
         ListNode a = new ListNode(1);
         ListNode b = new ListNode(3);
