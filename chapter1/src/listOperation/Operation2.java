@@ -1,5 +1,6 @@
 package listOperation;
 
+import java.util.HashSet;
 import java.util.Stack;
 
 /**
@@ -25,6 +26,40 @@ public class Operation2 {
         return pre;
     }
 
+    /**
+     * 递归法-翻转链表
+     * @param x
+     */
+    public static ListNode flagList_recursion(ListNode x){
+        if(x==null || x.next==null){
+            return x;
+        }
+        ListNode w = flagList_recursion(x.next);
+        x.next.next = x;
+        x.next = null;
+        return w;
+    }
+
+    /**
+     * 检测链表中是否存在环, method I: HashSet
+     * @param x
+     * @return
+     */
+    public static boolean hasCycle(ListNode x){
+        HashSet<ListNode> set = new HashSet<>();
+        set.add(x);
+        while(x.next!=null){
+            x = x.next;
+            if(set.contains(x)){
+                return true;
+            }
+            else{
+                set.add(x);
+            }
+        }
+        return false;
+    }
+
 
 
     public static void main(String[] args) { //测试新产生的链表，不会影响先前的链表
@@ -35,19 +70,21 @@ public class Operation2 {
         a.next = b;
         b.next = c;
         c.next = d;
-        d.next = new ListNode(5);
-        for (ListNode i = a; i!=null; i=i.next ) {
-            System.out.println(i.val);
-        }
-        System.out.println("----------");
-        ListNode s = flipList(a);
-        for (ListNode i = s; i!=null; i=i.next ) {
-            System.out.println(i.val);
-        }
-        System.out.println("----------");
-        for (ListNode i = d; i!=null; i=i.next ) {
-            System.out.println(i.val);
-        }
+        d.next = b;
+        System.out.println(hasCycle(a));
+
+//        for (ListNode i = a; i!=null; i=i.next ) {
+//            System.out.println(i.val);
+//        }
+//        System.out.println("----------");
+//        ListNode s = flipList(a);
+//        for (ListNode i = s; i!=null; i=i.next ) {
+//            System.out.println(i.val);
+//        }
+//        System.out.println("----------");
+//        for (ListNode i = d; i!=null; i=i.next ) {
+//            System.out.println(i.val);
+//        }
 
     }
 
