@@ -9,9 +9,17 @@ import java.util.Stack;
  * @contents 单链表翻转， 链表中环的检测， 删除链表倒数第n个节点， 求链表的中间节点
  */
 public class Operation2 {
+    /*
+    备注：链表代码的自检
+            1、链表为空null时候
+            2、链表只包含一个节点的时候
+            3、链表只包含两个节点的时候
+            4、代码在处理头结点和尾结点的时候
+            在上述情况下代码的鲁棒性
+     */
 
     /**
-     * 翻转链表
+     * 翻转链表 method I:迭代法
      * @param x
      * @return  返回翻转后的头部
      */
@@ -27,7 +35,7 @@ public class Operation2 {
     }
 
     /**
-     * 递归法-翻转链表
+     * 翻转链表 method II:递归法
      * @param x
      */
     public static ListNode flagList_recursion(ListNode x){
@@ -60,6 +68,67 @@ public class Operation2 {
         return false;
     }
 
+    /**
+     * 检测环 method II: 快慢指针
+     * @param x
+     * @return
+     */
+    public static boolean hasCycle2(ListNode x){
+        if(x==null) return false;
+        ListNode fast = x.next;
+        ListNode slow = x;
+        while(fast!=null && fast.next!=null) {
+            if(slow==fast) return true;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return false;
+    }
+
+    /**
+     * 删除倒数第k个节点 method： 双指针一次遍历
+     * @param list
+     * @param k 假设k输入不会超过链表长度
+     * @return
+     */
+    /*删除链表中节点的方法:
+     1.  prev.next = prev.next.next; 删除头结点可以借助dummy节点，dummy.next=head; dummy即为prev
+     2.  curr.val = curr.next.val;    curr.next=curr.next.next; 不需要找prev，但是不适用与删除最后一个节点
+     特殊情况链表只有一个节点，直接返回null
+     */
+    public static ListNode deleteLastKth (ListNode list, int k){
+        ListNode l = new ListNode(0);
+        l.next = list;
+        ListNode r = list;
+        for (int i = 0; i < k; i++) {                //双指针固定间距k移动，快指针到null，另一指针指倒数第k个节点
+            r = r.next;
+        }
+        while(r!=null){
+            l = l.next;
+            r = r.next;
+        }
+        if(l.next==list) {
+            list = list.next;                       //考虑如何删除第一个节点,返回head的特殊情况
+        }else{
+            l.next = l.next.next;
+        }
+        return  list;
+    }
+
+    /**
+     * 找中间节点 method: 快慢指针
+     * @return
+     */
+    public static ListNode findMiddle(ListNode head){
+        if(head==null || head.next==null) return head;
+        ListNode fast = head.next;
+        ListNode slow = head;
+        while(fast!=null && fast.next!=null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
 
 
     public static void main(String[] args) { //测试新产生的链表，不会影响先前的链表
@@ -70,12 +139,13 @@ public class Operation2 {
         a.next = b;
         b.next = c;
         c.next = d;
-        d.next = b;
-        System.out.println(hasCycle(a));
+//        System.out.println(hasCycle(a));
 
-//        for (ListNode i = a; i!=null; i=i.next ) {
-//            System.out.println(i.val);
-//        }
+        d = null;
+        ListNode s = deleteLastKth(a,1);
+        for (ListNode i = s; i!=null; i=i.next ) {
+            System.out.println(i.val);
+        }
 //        System.out.println("----------");
 //        ListNode s = flipList(a);
 //        for (ListNode i = s; i!=null; i=i.next ) {
