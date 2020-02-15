@@ -22,6 +22,31 @@ public class Operation1 {
     }
 
     /**
+     * 合并有序链表 -Method: 哑结点非递归
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public static ListNode mergeTwoLists_dummy(ListNode l1, ListNode l2){
+        ListNode dummy = new ListNode(0);
+        ListNode p = dummy;                                                  //利用哑结点代码形式更加一致
+
+        while(l1!=null && l2!=null){
+            if(l1.val<=l2.val){
+                p.next = l1;
+                l1 = l1.next;
+            }else{
+                p.next = l2;
+                l2 = l2.next;
+            }
+            p = p.next;
+        }
+        if(l1==null) p.next = l2;
+        else p.next = l1;
+        return dummy.next;
+    }
+
+    /**
      * 两个有序链表合并到新链表，并保证原链表是可用的
      * @param l1
      * @param l2
