@@ -130,8 +130,8 @@ public class Operation2 {
         return slow;
     }
 
-
-    public static void main(String[] args) { //测试新产生的链表，不会影响先前的链表
+    //test
+    public static void main(String[] args) {
         ListNode a = new ListNode(1);
         ListNode b = new ListNode(3);
         ListNode c = new ListNode(2);
