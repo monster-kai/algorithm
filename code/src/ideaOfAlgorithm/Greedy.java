@@ -2,6 +2,8 @@ package ideaOfAlgorithm;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Ryan
@@ -36,6 +38,24 @@ public class Greedy {
                     cnt++;
                     break;
                 }
+            }
+        }
+        return cnt;
+    }
+
+    /**
+     * 问题延伸  类似教室借用问题
+     * @param events  会议起始时间到结束必须参加才算完成一次会议
+     * @return
+     */
+    public static int maxEvents2(int[][] events){
+        Arrays.sort(events, (o1, o2) -> o1[1]!=o2[1]? o1[1]-o2[1] : o2[0]-o1[0]);   //lambda表达式,结束时间越早，持续时间越短的排在前边
+        int r = 0;
+        int cnt = 0;
+        for(int[] e:events){
+            if(e[0]>r) {
+                r = e[1];
+                cnt++;
             }
         }
         return cnt;
