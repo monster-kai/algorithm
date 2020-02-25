@@ -11,6 +11,7 @@ import java.util.PriorityQueue;
 public class L5343 {
     public static boolean isPossible(int[] target) {
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        //PriorityQueue 默认是小元素优先级高，加上Collections.reverseOrder(); 大元素优先级高
         int sum = 0;
         for (int i = 0; i < target.length; i++) {
             pq.add(target[i]);
@@ -27,6 +28,15 @@ public class L5343 {
             curr = pq.poll();
         }
         return true;
+    }
+
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder()){{
+            add(1); add(3); add(4); add(0);
+        }};
+        while(!pq.isEmpty()){
+            System.out.println(pq.poll());
+        }
 
     }
 
