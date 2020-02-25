@@ -39,7 +39,7 @@ public class _Stack {
         Stack<Integer> aux = new Stack<>();
         while(!s.isEmpty()){
             int curr = s.pop();
-            if(!aux.isEmpty() && curr>aux.peek()){
+            while(!aux.isEmpty() && curr>aux.peek()){
                 int w = aux.peek();
                 s.push(aux.pop());
             }
