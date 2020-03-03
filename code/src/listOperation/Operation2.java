@@ -150,15 +150,5 @@ public class Operation2 {
     for (ListNode i = s; i != null; i = i.next) {
       System.out.println(i.val);
     }
-    //        System.out.println("----------");
-    //        ListNode s = flipList(a);
-    //        for (ListNode i = s; i!=null; i=i.next ) {
-    //            System.out.println(i.val);
-    //        }
-    //        System.out.println("----------");
-    //        for (ListNode i = d; i!=null; i=i.next ) {
-    //            System.out.println(i.val);
-    //        }
-
   }
 }
